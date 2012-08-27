@@ -1,3 +1,5 @@
+require 'Time'
+
 module Capistrano
   class Logger #:nodoc:
     attr_accessor :level
@@ -28,13 +30,15 @@ module Capistrano
     end
 
     def log(level, message, line_prefix=nil)
-      if level <= self.level
+      #now_time = Time.now.strftime("%Y-%m-%d %H:%m:%S")
+      now_time = Time.now.strftime("%H:%m:%S")
+    if level <= self.level
         indent = "%*s" % [MAX_LEVEL, "*" * (MAX_LEVEL - level)]
         (RUBY_VERSION >= "1.9" ? message.lines : message).each do |line|
           if line_prefix
-            device.puts "#{indent} [#{line_prefix}] #{line.strip}\n"
+            device.puts "#{indent} [#{now_time}] [#{line_prefix}] #{line.strip}\n"
           else
-            device.puts "#{indent} #{line.strip}\n"
+            device.puts "#{indent} [#{now_time}] #{line.strip}\n"
           end
         end
       end
