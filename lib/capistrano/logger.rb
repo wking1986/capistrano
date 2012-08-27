@@ -1,4 +1,4 @@
-require 'Time'
+require 'time'
 
 module Capistrano
   class Logger #:nodoc:
