@@ -32,15 +32,15 @@ module Capistrano
     def log(level, message, line_prefix=nil)
       #now_time = Time.now.strftime("%Y-%m-%d %H:%m:%S")
       now_time = Time.now.strftime("%H:%m:%S")
-    if level <= self.level
-        indent = "%*s" % [MAX_LEVEL, "*" * (MAX_LEVEL - level)]
-        (RUBY_VERSION >= "1.9" ? message.lines : message).each do |line|
-          if line_prefix
-            device.puts "#{indent} [#{now_time}] [#{line_prefix}] #{line.strip}\n"
-          else
-            device.puts "#{indent} [#{now_time}] #{line.strip}\n"
+      if level <= self.level
+          indent = "%*s" % [MAX_LEVEL, "*" * (MAX_LEVEL - level)]
+          (RUBY_VERSION >= "1.9" ? message.lines : message).each do |line|
+            if line_prefix
+              device.puts "#{indent} [#{now_time}] [#{line_prefix}] #{line.strip}\n"
+            else
+              device.puts "#{indent} [#{now_time}] #{line.strip}\n"
+            end
           end
-        end
       end
     end
 

@@ -166,7 +166,7 @@ module Capistrano
         end
       end
 
-      logger.trace "command finished in #{(elapsed * 1000).round}ms" if logger
+      #logger.trace "command finished in #{(elapsed * 1000).round}ms" if logger
 
       if (failed = @channels.select { |ch| ch[:status] != 0 }).any?
         commands = failed.inject({}) { |map, ch| (map[ch[:command]] ||= []) << ch[:server]; map }
@@ -205,7 +205,7 @@ module Capistrano
 
               request_pty_if_necessary(channel) do |ch, success|
                 if success
-                  logger.trace "executing command", ch[:server] if logger
+                  #logger.trace "executing command", ch[:server] if logger
                   cmd = replace_placeholders(channel[:branch].command, ch)
 
                   if options[:shell] == false
@@ -219,7 +219,7 @@ module Capistrano
                   command_line = [environment, shell, cmd].compact.join(" ")
                   ch[:command] = command_line
 
-                  logger.trace command_line, ch[:server] if logger && options[:verbose_command_log]
+                  #logger.trace command_line, ch[:server] if logger && options[:verbose_command_log]
 
                   ch.exec(command_line)
                   ch.send_data(options[:data]) if options[:data]
